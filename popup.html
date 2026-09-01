@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unlimited Accounts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="popup.css">
+  <script src="accent-boot.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header class="topbar">
+      <div class="wordmark">
+        <span class="wordmark-square" aria-hidden="true"></span>
+        <h1>UNLIMITED</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="dashboard-btn" class="btn-icon" title="Dashboard" aria-label="Dashboard">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+        </button>
+        <button id="settings-btn" class="btn-icon settings-btn" title="Settings" aria-label="Settings">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="status-bar" aria-label="Current session">
+      <img id="current-avatar" class="avatar hidden" src="" alt="">
+      <div class="status-info">
+        <span id="current-name" class="status-name">Loading...</span>
+        <span id="status-dot" class="status-dot" aria-hidden="true"></span>
+        <span id="status-label" class="status-label">—</span>
+      </div>
+      <span id="status-slot" class="status-slot hidden"></span>
+    </section>
+
+    <button id="save-btn" class="btn btn-primary btn-full">Save Current</button>
+
+    <div class="accounts-section">
+      <div class="section-header">
+        <span class="section-title">Accounts</span>
+        <span id="account-count" class="section-count"></span>
+        <div class="view-toggle">
+          <button id="view-list-btn" class="btn-icon view-btn active" title="List view" aria-label="List view">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/></svg>
+          </button>
+          <button id="view-tile-btn" class="btn-icon view-btn" title="Tile view" aria-label="Tile view">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+          </button>
+        </div>
+      </div>
+      <input type="text" id="search-input" class="search-input" placeholder="Search accounts..." autocomplete="off">
+      <div class="group-filter">
+        <button class="group-tab active" data-group="all">All</button>
+        <div id="group-tabs" class="group-tabs"></div>
+        <div class="group-actions">
+          <button id="edit-group-btn" class="btn-icon group-edit" title="Edit Group">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+          </button>
+          <button id="delete-group-btn" class="btn-icon group-delete" title="Delete Group">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+          <button id="add-group-btn" class="btn-icon add-group" title="Add Group">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          </button>
+        </div>
+      </div>
+      <div id="accounts-list" class="accounts-list"></div>
+    </div>
+
+    <div id="io-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h3 id="modal-title"></h3>
+        <div id="modal-body"></div>
+        <div class="modal-actions">
+          <button id="modal-cancel" class="btn btn-ghost">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="message" class="message hidden" role="status"></div>
+  </div>
+
+  <script src="icons.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

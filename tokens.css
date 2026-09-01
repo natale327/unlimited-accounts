@@ -1,0 +1,63 @@
+/* Hallmark · tokens · Console theme · designed-as-app (design.md) */
+
+:root {
+  /* Surface */
+  --color-paper:        oklch(15% 0.012 255);
+  --color-paper-2:      oklch(20% 0.015 255);
+  --color-paper-3:      oklch(25% 0.018 255);
+
+  /* Ink */
+  --color-ink:          oklch(95% 0.005 255);
+  --color-ink-2:        oklch(72% 0.02 255);
+  --color-ink-3:        oklch(52% 0.02 255);
+  --color-rule:         oklch(30% 0.02 255);
+
+  /* Accent (X blue) */
+  --color-accent:        oklch(64% 0.2 250);
+  --color-accent-strong: oklch(70% 0.19 250);
+  --color-accent-soft:   oklch(26% 0.09 250);
+  --color-accent-ink:    oklch(98% 0.005 255);
+
+  /* Status */
+  --color-focus:         oklch(74% 0.15 250);
+  --color-success:       oklch(70% 0.15 160);
+  --color-success-soft:  oklch(22% 0.05 160);
+  --color-warning:       oklch(82% 0.14 85);
+  --color-warning-soft:  oklch(23% 0.05 85);
+  --color-danger:        oklch(62% 0.2 25);
+  --color-danger-strong: oklch(68% 0.2 25);
+  --color-danger-soft:   oklch(23% 0.07 25);
+
+  /* Effects */
+  --color-scrim:   oklch(8% 0.01 255 / 0.8);
+  --shadow-drop:   0 4px 16px oklch(0% 0 0 / 0.5);
+
+  /* Type */
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'JetBrains Mono', 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.75rem;
+  --text-md: 0.8125rem;
+  --text-lg: 0.9375rem;
+  --text-xl: 1.125rem;
+
+  /* Space (4pt scale) */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+
+  /* Shape */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Motion */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 150ms;
+  --dur-med:   220ms;
+}

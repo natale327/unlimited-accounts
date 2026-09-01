@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — Unlimited Accounts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="settings.css">
+  <script src="accent-boot.js"></script>
+</head>
+<body>
+  <div class="s-container">
+    <header class="s-header">
+      <div class="wordmark">
+        <span class="wordmark-square" aria-hidden="true"></span>
+        <h1>SETTINGS</h1>
+      </div>
+      <p class="s-subtitle">Twitter Unlimited Accounts</p>
+    </header>
+
+    <section class="s-section" data-section="01">
+      <div class="s-section-head">
+        <span class="s-num">01</span>
+        <h2>Data Management</h2>
+      </div>
+      <p class="s-desc">Export saves all accounts to an encrypted file. Import restores them.</p>
+      <div class="s-row">
+        <button id="export-btn" class="btn btn-secondary">Export (Encrypted)</button>
+        <button id="import-btn" class="btn btn-secondary">Import File</button>
+      </div>
+    </section>
+
+    <section class="s-section" data-section="02">
+      <div class="s-section-head">
+        <span class="s-num">02</span>
+        <h2>Cookie Import</h2>
+      </div>
+      <p class="s-desc">Add an account by pasting auth_token directly.</p>
+      <div class="s-field">
+        <input type="text" id="cookie-auth" class="s-input" placeholder="auth_token" autocomplete="off" spellcheck="false">
+        <input type="text" id="cookie-ct0" class="s-input" placeholder="ct0 (optional)" autocomplete="off" spellcheck="false">
+        <input type="text" id="cookie-username" class="s-input" placeholder="Username (optional)" autocomplete="off" spellcheck="false">
+        <button id="cookie-import" class="btn btn-primary">Add Account</button>
+      </div>
+    </section>
+
+    <section class="s-section" data-section="03">
+      <div class="s-section-head">
+        <span class="s-num">03</span>
+        <h2>Current Cookies</h2>
+      </div>
+      <p class="s-desc">View your current Twitter session cookies.</p>
+      <button id="get-cookie-btn" class="btn btn-secondary">Show Cookies</button>
+      <div id="cookie-display" class="cookie-display hidden"></div>
+    </section>
+
+    <section class="s-section" data-section="04">
+      <div class="s-section-head">
+        <span class="s-num">04</span>
+        <h2>Keyboard Shortcuts</h2>
+      </div>
+      <p class="s-desc">Switch accounts without opening this popup.</p>
+      <div id="shortcut-list" class="shortcut-list">
+        <p class="s-desc">Loading…</p>
+      </div>
+      <p class="s-desc">Customize at <code>chrome://extensions/shortcuts</code></p>
+    </section>
+
+    <section class="s-section" data-section="05">
+      <div class="s-section-head">
+        <span class="s-num">05</span>
+        <h2>Appearance</h2>
+      </div>
+      <p class="s-desc">Accent color used for buttons, highlights and the toolbar badge.</p>
+      <div class="accent-row">
+        <input type="color" id="accent-color" class="color-input" value="#1d9bf0" title="Accent color">
+        <div class="rgb-inputs">
+          <label class="rgb-field">R <input type="number" id="accent-r" min="0" max="255"></label>
+          <label class="rgb-field">G <input type="number" id="accent-g" min="0" max="255"></label>
+          <label class="rgb-field">B <input type="number" id="accent-b" min="0" max="255"></label>
+        </div>
+        <div id="accent-presets" class="accent-presets"></div>
+        <button id="accent-reset" class="btn btn-ghost">Reset</button>
+      </div>
+      <label class="radio-label checkbox-row">
+        <input type="checkbox" id="remember-group">
+        <span>Reopen with the last selected group</span>
+      </label>
+    </section>
+
+    <section class="s-section" data-section="06">
+      <div class="s-section-head">
+        <span class="s-num">06</span>
+        <h2>Switch History</h2>
+      </div>
+      <p class="s-desc">Recent account switches (latest 200).</p>
+      <div class="s-row">
+        <button id="history-clear-btn" class="btn btn-danger">Clear History</button>
+      </div>
+      <div id="history-list" class="history-list">
+        <p class="s-desc">Loading…</p>
+      </div>
+    </section>
+
+    <section class="s-section" data-section="07">
+      <div class="s-section-head">
+        <span class="s-num">07</span>
+        <h2>Page Integration</h2>
+      </div>
+      <p class="s-desc">Show the in-page account switcher on x.com pages.</p>
+      <div class="s-row">
+        <label class="radio-label checkbox-row">
+          <input type="checkbox" id="inpage-switcher">
+          <span>Show in-page account switcher on x.com</span>
+        </label>
+      </div>
+    </section>
+
+    <div id="io-modal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h3 id="modal-title"></h3>
+        <div id="modal-body"></div>
+        <div class="modal-actions">
+          <button id="modal-cancel" class="btn btn-ghost">Cancel</button>
+          <button id="modal-confirm" class="btn btn-primary">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <input type="file" id="file-input" accept=".tua" class="hidden">
+    <div id="message" class="message hidden" role="status"></div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
