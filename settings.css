@@ -463,10 +463,6 @@ body {
   display: none;
 }
 
-/* ── Bookmarks ── */
-
-
-
 .btn-danger {
   background: var(--color-danger-soft);
   color: var(--color-danger-strong);
