@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Twitter Unlimited Accounts",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Save and switch between multiple X accounts. Dashboard, groups and unread badges. All data stays local.",
   "permissions": [
     "cookies",
@@ -33,7 +33,8 @@
         "*://twitter.com/*"
       ],
       "js": ["content.js"],
-      "run_at": "document_idle"
+      "run_at": "document_idle",
+      "world": "ISOLATED"
     }
   ],
   "commands": {

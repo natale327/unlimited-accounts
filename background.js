@@ -250,7 +250,13 @@ async function getUserInfoFromTabs() {
   const tabs = await chrome.tabs.query({ url: ['*://x.com/*', '*://twitter.com/*'] });
   for (const tab of tabs) {
     try { await chrome.tabs.sendMessage(tab.id, { action: 'ping' }); } catch {
-      try { await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['content.js'] }); } catch {}
+      try {
+        await chrome.scripting.executeScript({
+          target: { tabId: tab.id },
+          files: ['content.js'],
+          world: 'ISOLATED'
+        });
+      } catch {}
     }
     try {
       const info = await chrome.tabs.sendMessage(tab.id, { action: 'getUserInfo' });

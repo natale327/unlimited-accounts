@@ -1,4 +1,7 @@
 (() => {
+  const runtime = globalThis.chrome?.runtime;
+  if (!runtime?.onMessage) return;
+
   function getBannerUrl() {
     const header = document.querySelector('[data-testid="profileHeader"]');
     if (header) {
@@ -48,7 +51,7 @@
     return { username, displayName, avatarUrl, profileBannerUrl: bannerUrl };
   }
 
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === 'getUserInfo') {
       sendResponse(getCurrentUserInfo());
     } else if (message.action === 'ping') {
@@ -61,6 +64,10 @@
 
 (() => {
   if (window.top !== window) return;
+
+  const runtime = globalThis.chrome?.runtime;
+  const storage = globalThis.chrome?.storage;
+  if (!runtime?.sendMessage || !storage?.local || !storage?.onChanged) return;
 
   const RAIL_ID = 'twu-switcher-rail';
 
@@ -260,12 +267,22 @@
     }
   }
 
+  function sendRuntimeMessage(message) {
+    const currentRuntime = globalThis.chrome?.runtime;
+    if (typeof currentRuntime?.sendMessage !== 'function') return Promise.resolve(null);
+    try {
+      return Promise.resolve(currentRuntime.sendMessage(message));
+    } catch {
+      return Promise.resolve(null);
+    }
+  }
+
   function triggerSwitch(session, btn, source) {
     if (switching) return;
     switching = true;
     clearTimeout(switchTimeout);
     switchTimeout = setTimeout(() => { switching = false; }, 5000);
-    chrome.runtime.sendMessage({ action: 'switchSession', id: session.id, source })
+    sendRuntimeMessage({ action: 'switchSession', id: session.id, source })
       .then((result) => {
         switching = false;
         clearTimeout(switchTimeout);
@@ -441,8 +458,8 @@
   async function refresh() {
     try {
       const [sessionsResult, current] = await Promise.all([
-        chrome.runtime.sendMessage({ action: 'getSessions' }),
-        chrome.runtime.sendMessage({ action: 'getCurrentSession' })
+        sendRuntimeMessage({ action: 'getSessions' }),
+        sendRuntimeMessage({ action: 'getCurrentSession' })
       ]);
       sessions = sessionsResult || [];
       currentUserId = (current && current.userId) || null;
@@ -450,7 +467,7 @@
     } catch {}
   }
 
-  chrome.storage.onChanged.addListener((changes, area) => {
+  storage.onChanged.addListener((changes, area) => {
     if (area !== 'local') return;
     if (changes.sessions) refresh();
     if (changes.uiInpageSwitcher) {
@@ -459,7 +476,7 @@
     }
   });
 
-  chrome.storage.local.get('uiInpageSwitcher').then((data) => {
+  storage.local.get('uiInpageSwitcher').then((data) => {
     enabled = data.uiInpageSwitcher !== false;
     loadRailPosition();
     (document.body || document.documentElement).appendChild(rail);
